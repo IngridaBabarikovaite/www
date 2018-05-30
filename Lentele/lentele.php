@@ -24,17 +24,17 @@ $sql = 'SELECT * FROM radars';
 // Vykdome suformuotą užklausą duomenų bazėje
 $result = $conn->query($sql); 
 
-$auto = [];
+$autos = [];
 
 // Tikriname ar rezultate yra bent viena eilutė
 if ($result->num_rows > 0) { 
     while($row = $result->fetch_assoc()) {
-        $auto[] = $row;
+        $autos[] = $row;
     }
 }
 
 echo json_encode([
     'success' => true,
-    'data' => $auto
+    'data' => $autos
 ]);
 

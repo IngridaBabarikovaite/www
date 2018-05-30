@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Login'as</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="https://use.fontawesome.com/6603c9fd94.js"></script>
+    </head>
+    <body>
+        <form method="POST">
+            <label>Naujas slaptažodis</label>
+            <input id="newpass" type="password">
+            <label>Pakartotinai suvestas naujas slaptažodis</label>
+            <input id="repeatedpass" type="password">
+            <button onclick="veiksmas()">Keisti</button>
+        </form>
+
+        <button onclick="login()">Login AJAX</button>
+
+        <script>
+            function veiksmas() {
+            if (("newpass").val === ("repeatedpass").val) {
+                document.write ('Slaptažodis keičiamas...');
+            } else {
+                //nemato, kad nesutampa ir elgiasi kaip pirmoj salygoj
+                document.write ('Slaptažodžiai nesutampa - pakartokite dar kartą');
+            }}
+        </script>
+        <script>
+                function login() {
+                    $('p').html('<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Connecting...</span>');
+                    $.post('01-login.php', {
+                        user: $('input[name="user"]').val(),
+                        pass: $('input[name="pass"]').val()
+                    }).done(function(resp) {
+                        if (resp.success) {
+                            $('#container').empty();
+                            $('p').html('Prisijungta');
+                            lentele();
+                        } else {
+                            $('p').html(resp.error)
+                        }
+                    });
+                    
+                }
+                function lentele() {
+                    //TODO
+                }
+            </script>
+    </body>
+</html>
